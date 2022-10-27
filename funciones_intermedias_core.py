@@ -42,7 +42,7 @@ def iterateDictionary(some_list):
             mysentence += (f' {x} --- {y},') 
         print(mysentence[:-1])                   #esto se imprime dentro del segundo for para que se imprima una mysentence por diccionario y se le resta la ultima coma usando [:-1]
 
-    #Prueba: 
+    #test: 
 
 iterateDictionary(estudiantes)
 
