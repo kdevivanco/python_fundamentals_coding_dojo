@@ -17,6 +17,8 @@ estudiantes[0]['last_name'] = "Bryant"
 directorio_deportes['futbol'][0] = 'Messi'
 z[0]['y']=30
 
+
+
 #Solucion 2: 
 
 estudiantes = [
@@ -40,11 +42,25 @@ def iterateDictionary(some_list):
             mysentence += (f' {x} --- {y},') 
         print(mysentence[:-1])                   #esto se imprime dentro del segundo for para que se imprima una mysentence por diccionario y se le resta la ultima coma usando [:-1]
 
+    #Prueba: 
+
+iterateDictionary(estudiantes)
+
+
+
+
 #Solucion 3
 
 def iterateDictionary2(key_name, some_list):
     for diccionario in some_list:              #Por cada diccionario en la lista
         print(diccionario[key_name])           #imprime el valor asociado al argumento key_name
+
+    #test1: 
+iterateDictionary2('first_name',estudiantes)
+
+    #test2
+iterateDictionary2('last_name',estudiantes)
+
 
 
 #Solucion 4
@@ -55,7 +71,6 @@ dojo = {
     'instructores': ['Michael', 'Amy', 'Eduardo', 'Josh', 'Graham', 'Patrick', 'Minh', 'Devon']
 }
 
-
 def printInfo(some_dict):
     for key in some_dict:                       #Por cada key en el argumento en some_dict
         valuelist = some_dict[key]              #valuelist = los valores de ese key 
@@ -64,3 +79,6 @@ def printInfo(some_dict):
         for some_value in valuelist:
             print (some_value)                  #por cada item (valor) en la lista imprime el valor
         print('')                               #line jump en el primer loop
+
+    #test:
+printInfo(dojo)
