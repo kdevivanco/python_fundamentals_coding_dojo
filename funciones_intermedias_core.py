@@ -71,8 +71,13 @@ dojo = {
     'instructores': ['Michael', 'Amy', 'Eduardo', 'Josh', 'Graham', 'Patrick', 'Minh', 'Devon']
 }
 
+dojo = {
+    'ubicaciones': ['San Jose', 'Seattle', 'Dallas', 'Chicago', 'Tulsa', 'DC', 'Burbank'],
+    'instructores': ['Michael', 'Amy', 'Eduardo', 'Josh', 'Graham', 'Patrick', 'Minh', 'Devon']
+}
+
 def printInfo(some_dict):
-    for key in some_dict:                       #Por cada key en el argumento en some_dict
+    for key,value in some_dict.items(): #Por cada key en el argumento en some_dict
         valuelist = some_dict[key]              #valuelist = los valores de ese key 
         lengthoflist = len(valuelist)       
         print(f'{lengthoflist} {key.upper()}')  #imprime el largo de la lista de values + el nombre del key
@@ -82,3 +87,4 @@ def printInfo(some_dict):
 
     #test:
 printInfo(dojo)
+
