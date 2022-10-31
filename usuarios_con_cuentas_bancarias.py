@@ -1,17 +1,22 @@
-#Este trabajo pertenece a: KAYLA DE VIVANCO
+import random 
 
 class CuentaBancaria:
-    # ¡No olvides agregar algunos valores predeterminados para estos parámetros!
+    todas_las_cuentas = []
+    todos_los_numeros = []
+    
     def __init__(self, name, tasa_interes = 1, balance = 0): 
         self.name = name
         self.ta = tasa_interes
         self.balance = balance
-        # tu código aquí (recuerda, los atributos de instancia van aquí)
-        # no te preocupes por la información del usuario aquí; pronto involucraremos la clase de usuario
+        self.generar_numero()
+        CuentaBancaria.todas_las_cuentas.append(self)
+        CuentaBancaria.todos_los_numeros.append(self.nrodecuenta)
+        
     def deposito(self, amount):
         self.balance += amount
         print(f'Depositaste {amount} a tu cuenta')
         return self
+    
     def retiro(self, amount):
         if amount>self.balance:
             self.balance -= 5
@@ -20,15 +25,26 @@ class CuentaBancaria:
             self.balance -= amount
             print(f'Retiraste {amount} a tu cuenta')
         return self
+    
     def mostrar_balance(self):
         print(f'Balance: ${self.balance}, esta en {self.name}')
         return self
+    
     def generar_interés(self):
         self.balance = self.balance + self.balance * self.ta 
         print(f'Tu nuevo balance es {self.balance}. TASA DE INTERES: {self.ta}')
         return self
-    def showTipo(self):
+    
+    def show_name(self):
         return self.name
+    
+        
+    def generar_numero(self):
+        self.nrodecuenta = ''
+        for i in range(10):
+            self.nrodecuenta += str(random.randint(0, 9))
+        print('Numero de cuenta ' + self.nrodecuenta)
+
 
 class Usuario: 
     instancias = []
@@ -37,41 +53,57 @@ class Usuario:
         Usuario.instancias.append(self.titular)
         self.cuentas = []
         self.cuentastuple = []
-        
-    def crear_cuenta(self):
-        moneda = input('Escoge moneda de cuenta(dolares,soles,euros): ')
-        self.cuentas.append(CuentaBancaria(moneda))
-        print(f'Cuenta en {moneda} creada!')
-        
-        
-    
-    def hacer_deposito(self,amount,indice):
-        self.cuentas[indice].deposito(amount)
-        
-    def showCuentas(self):
-        i=0
-        for cuenta in self.cuentas:
-            print(f'Cuenta n°{i} esta en {cuenta.showTipo()}')
-            i+=1
-    def cuentasdict(self):
-        i=0
-        for cuenta in self.cuentas:
-            i+=1
-            index = str(i)
-            cuentatuple = (index,cuenta.name)
-            self.cuentastuple.append(cuentatuple)
-        
-    
-    def hacer_retiro(self,amount):
-        pass
-        
-    def mostrar_balance(self):
-        for cuenta in self.cuentas:
+
+    def crear_cuenta(self,tipo): #funciona
+        #tipo = input('Escoge tipo de cuenta(ahorros, corriente): ')
+        self.cuentas.append(CuentaBancaria(tipo))
+        print(f'Cuenta en {tipo} creada!')
+        nrodecuenta = ''
             
-            cuenta.mostrar_balance()
+    def hacer_deposito(self,amount,numero_de_cuenta): #funciona
+        for i in range(len(self.cuentas)):
+            if  str(self.cuentas[i].nrodecuenta) == str(numero_de_cuenta):
+                return self.cuentas[i].deposito(amount)
+
+    def hacer_retiro(self,amount,numero_de_cuenta):#funciona
+        for i in range(len(self.cuentas)):
+            if  str(self.cuentas[i].nrodecuenta) == str(numero_de_cuenta):
+                self.cuentas[i].retiro(amount)
         
-    def transfer_dinero(self, other_user, amount): 
-        pass
-    
-    def nombrar_cuentas(self):
-        print(self.cuentas)
+    def mostrar_balance(self,numero_de_cuenta): #funciona
+        for i in range(len(self.cuentas)):       
+            if  str(self.cuentas[i].nrodecuenta) == str(numero_de_cuenta):
+                self.cuentas[i].mostrar_balance()
+
+    def mostrar_cuentas(self): #funciona
+        i=0
+        for i in range(len(self.cuentas)):
+            print(self.cuentas[i].name, self.cuentas[i].nrodecuenta)
+            
+
+    def transfer_dinero(self, nrousuario, nrodestinatario, amount):  #bajo construccion
+        nrousuario = input("Ingresa tu numero de cuenta: ")
+        nrodestinatario = input("Ingresa numero de cuenta del destinatario: ")
+        
+        if nrodestinatario not in CuentaBancaria.todos_los_numeros:
+            print('Esta cuenta no existe')
+        else: 
+            for cuenta in CuentaBancaria.todas_las_cuentas:
+                verificacion = (f'El destinatario es: {cuenta.name}? Ingresa (Si o No)')
+                respuesta = input(verificacion)
+                
+                if respuesta.lower() == 'si':
+                    monto_a_depositar = input('Ingrese monto')
+                    self.hacer_retiro(monto_a_depositar,nrousuario)
+                    
+                    
+                else:
+                    print('Vuelva a intentarlo')
+                    break
+
+#Proximos pasos: 
+#1. Agregar funcion "verificacion" donde se verifica que el numero de cuenta ingresado es correcto
+#2. Agregar esta funcion a cada metodo de CuentaBancaria o Usuario (por verse) para no tener que repetir codigo
+#3. Terminar de construir el metodo transferir dinero 
+
+
