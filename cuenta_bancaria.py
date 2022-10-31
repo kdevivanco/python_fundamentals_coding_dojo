@@ -1,11 +1,13 @@
 class CuentaBancaria:
-    instanciascuenta = []
+    #Lista que acumula todas los objetos de la clase (instancias)
+    instancias = []
+    
     def __init__(self, name, tasa_interes = 1, balance = 0): 
         self.name = name
         self.ta = tasa_interes
         self.balance = balance
-        self.info = (f'nombre {self.name} | balance {self.balance}')
-
+        CuentaBancaria.instancias.append(self) #Cada vez que se agrega un objeto se suma a la lista
+        
     def deposito(self, amount):
         self.balance += amount
         print(f'Depositaste {amount} a tu cuenta')
@@ -34,7 +36,7 @@ class CuentaBancaria:
             return self
         
     #Bonus: imprime todas las instancias de la informacion de la cuenta
-    def showinstances(self):
-        CuentaBancaria.instanciascuenta.append(self.info)
-        for instancia in CuentaBancaria.instanciascuenta:
-            print(instancia)
+    @classmethod
+    def mostrar_instancias(cls):
+        for inst in CuentaBancaria.instancias: #por cada instancia en la clase... 
+            print(f'Nombre: {inst.name} | Balance: {inst.balance}') #muestra el nombre y el balance
