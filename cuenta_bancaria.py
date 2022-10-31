@@ -40,3 +40,23 @@ class CuentaBancaria:
     def mostrar_instancias(cls):
         for inst in CuentaBancaria.instancias: #por cada instancia en la clase... 
             print(f'Nombre: {inst.name} | Balance: {inst.balance}') #muestra el nombre y el balance
+
+
+
+#Crea dos cuentas: 
+
+cuenta1 = CuentaBancaria('Kayla Soles', 0.1, 200)
+
+cuenta2 = CuentaBancaria('Maria Soles', 0.05,300)
+
+#Para la primera cuenta, haz 3 depósitos y 1 retiro, luego genera intereses y muestra la información de la cuenta, todo en una línea de código (es decir, encadenando)
+
+cuenta1.deposito(300).deposito(1000).deposito(300).retiro(500).generar_interes().mostrar_balance()
+
+#Para la segunda cuenta, haz 2 depósitos y 4 retiros, luego genera intereses y muestra la información de la cuenta, todo en una línea de código (es decir, encadenando)
+
+cuenta2.deposito(300).deposito(1000).retiro(300).retiro(500).retiro(60).retiro(250).generar_interes().mostrar_balance()
+
+#BONUS NINJA: utiliza un método de clase para imprimir todas las instancias de la información de una cuenta bancaria
+
+CuentaBancaria.mostrar_instancias()
