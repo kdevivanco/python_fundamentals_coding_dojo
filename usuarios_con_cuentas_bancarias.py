@@ -46,6 +46,7 @@ class CuentaBancaria:
         print('Numero de cuenta ' + self.nrodecuenta)
 
 
+
 class Usuario: 
     instancias = []
     def __init__(self, titular):
@@ -54,34 +55,39 @@ class Usuario:
         self.cuentas = []
         self.cuentastuple = []
 
-    def crear_cuenta(self,tipo): #funciona
+    def crear_cuenta(self,tipo):
         #tipo = input('Escoge tipo de cuenta(ahorros, corriente): ')
         self.cuentas.append(CuentaBancaria(tipo))
         print(f'Cuenta en {tipo} creada!')
         nrodecuenta = ''
+    
+    def verificacion_cuenta(self,numero_de_cuenta): #Se agrego metodo verificacion_cuenta: nos retorna la cuenta correspondiente al nro
+        for i in range(len(self.cuentas)):
+            if  str(self.cuentas[i].nrodecuenta) == str(numero_de_cuenta):
+                return self.cuentas[i]
+            else:
+                print('Cuenta no encontrada')
             
-    def hacer_deposito(self,amount,numero_de_cuenta): #funciona
-        for i in range(len(self.cuentas)):
-            if  str(self.cuentas[i].nrodecuenta) == str(numero_de_cuenta):
-                return self.cuentas[i].deposito(amount)
+    def hacer_deposito(self,amount,numero_de_cuenta):
+        cuenta = self.verificacion_cuenta(numero_de_cuenta)
+        cuenta.deposito(amount)
 
-    def hacer_retiro(self,amount,numero_de_cuenta):#funciona
-        for i in range(len(self.cuentas)):
-            if  str(self.cuentas[i].nrodecuenta) == str(numero_de_cuenta):
-                self.cuentas[i].retiro(amount)
+    def hacer_retiro(self,amount,numero_de_cuenta):
+        cuenta = self.verificacion_cuenta(numero_de_cuenta)
+        cuenta.retiro(amount)
         
-    def mostrar_balance(self,numero_de_cuenta): #funciona
-        for i in range(len(self.cuentas)):       
-            if  str(self.cuentas[i].nrodecuenta) == str(numero_de_cuenta):
-                self.cuentas[i].mostrar_balance()
+    def mostrar_balance(self,numero_de_cuenta):
+        cuenta = self.verificacion_cuenta(numero_de_cuenta)
+        cuenta.mostrar_balance()
 
-    def mostrar_cuentas(self): #funciona
+    def mostrar_cuentas(self): #Se modifico el metodo mostrar cuentas para mostrar la info completa
         i=0
         for i in range(len(self.cuentas)):
-            print(self.cuentas[i].name, self.cuentas[i].nrodecuenta)
+            cuenta = self.cuentas[i] #asignacion de variable para codigo mas limpio
+            print(f'{self.titular}, {cuenta.name} {cuenta.nrodecuenta} | $ {cuenta.balance}')
             
 
-    def transfer_dinero(self, nrousuario, nrodestinatario, amount):  #bajo construccion
+    def transfer_dinero(self, nrousuario, nrodestinatario, amount): 
         nrousuario = input("Ingresa tu numero de cuenta: ")
         nrodestinatario = input("Ingresa numero de cuenta del destinatario: ")
         
@@ -100,7 +106,6 @@ class Usuario:
                 else:
                     print('Vuelva a intentarlo')
                     break
-
 #Proximos pasos: 
 #1. Agregar funcion "verificacion" donde se verifica que el numero de cuenta ingresado es correcto
 #2. Agregar esta funcion a cada metodo de CuentaBancaria o Usuario (por verse) para no tener que repetir codigo
