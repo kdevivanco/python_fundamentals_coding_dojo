@@ -26,24 +26,24 @@ class Mascota:
         self.energia = energia
         self.salud = salud
 
-    def dormir():
+    def dormir(self):
         print(f'{self.name} esta durmiendo')
         self.energia += 5 
         print(f'Energia subio a: {self.energia}')
     
-    def comer():
+    def comer(self):
         print(f'{self.name} está comiendo!')
         self.energia += 5
         self.salud += 10
         print(f'Energia subio a: {self.energia}')
         print(f'Salud subio a: {self.salud}')
     
-    def jugar():
+    def jugar(self):
         print(f'Estas jugando con {self.name}')
         self.salud += 5
         print(f'Salud subio a: {self.salud}')
     
-    def ruido():
+    def ruido(self):
         print(f'{self.name}: woof')
 
     
