@@ -138,8 +138,3 @@ class Usuario:
                 return
                 
 
-
-kayla = Usuario('Kayla de Vivanco')
-kayla.crear_cuenta()
-
-
