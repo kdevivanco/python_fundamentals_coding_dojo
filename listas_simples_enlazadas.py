@@ -60,26 +60,31 @@ class SLList:
                 runner.next = None
                 return self
             runner = runner.next 
-    
-    def fetch_node(self,val):
-        runner = self.head
-        while runner != None:
-            runner = runner.next
-            if runner.value == val:
-                selected_node = runner  
-                print(selected_node.value)
-                return selected_node
-            
-    def remove_val(self,val):
-        node = self.fetch_node(val)
-        runner = self.head
-        if runner.next == node: #le sigue al primero
-            print(f'{runner.value} is first then comes {node.value}')
-            runner.next = None #borra todo lo que le sigue
-            print(f'{node} has been removed')
 
+    
+    def remove_val(self,val): #funciona pero tira error de out of scope 
+        runner = self.head
+
+        #if value is the first element... 
+        if runner.value == val:
+            self.remove_from_front()
+            return self
+        else: 
+            while runner != None:
+                if runner.next.value == val:
+                    first = runner
+                    to_delete = runner.next
+                    runner.next = to_delete.next 
+                    print(val)
+                    
+                        
+                    
+                #if runner.next.value == val:
+                #   runner.next = runner.next.next
+                runner = runner.next  
 
 class SLNode:
     def __init__(self,val):
         self.value = val
         self.next = None
+        
