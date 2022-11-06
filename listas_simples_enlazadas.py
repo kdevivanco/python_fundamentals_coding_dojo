@@ -56,11 +56,10 @@ class SLList:
         runner = self.head #nodo 1
         #a_list = [] mi metodo
         while runner != None: #osea que no es el ultimo nodo
-            runner = runner.next 
             if runner.next == last_element: # ubicamos al ultimo nodo
-                print(last_element.value)
                 runner.next = None
                 return self
+            runner = runner.next 
     
     def fetch_node(self,val):
         runner = self.head
@@ -78,9 +77,6 @@ class SLList:
             print(f'{runner.value} is first then comes {node.value}')
             runner.next = None #borra todo lo que le sigue
             print(f'{node} has been removed')
-      
-        
-            
 
 
 class SLNode:
