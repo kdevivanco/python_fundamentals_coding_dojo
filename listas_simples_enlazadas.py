@@ -62,7 +62,7 @@ class SLList:
             runner = runner.next 
 
     
-    def remove_val(self,val): #funciona pero tira error de out of scope 
+    def remove_val(self,val):
         runner = self.head
 
         #if value is the first element... 
@@ -71,6 +71,9 @@ class SLList:
             return self
         else: 
             while runner != None:
+                #para no tener atributeerror: 
+                if runner.next == None:
+                    return #esto previene que se salga de la iteracion 
                 if runner.next.value == val:
                     first = runner
                     to_delete = runner.next
@@ -82,9 +85,38 @@ class SLList:
                 #if runner.next.value == val:
                 #   runner.next = runner.next.next
                 runner = runner.next  
+    
+    def create_index(self): #funcion para crear e imprimir indices
+        counter =  0
+        runner = self.head #nodo 1
+        while runner != None:
+            print(runner.value,counter)
+            runner.index = counter  #crea un nuevo atributo para los nodos: indice
+            runner = runner.next 
+            counter +=1
+        return self
+
+    def insert_val(self,val,index):
+        self.create_index() #crea los indices
+        runner = self.head 
+        while runner != None:
+            if runner.next == None: #Evita salirse del scope de la lista
+                    return
+            if runner.next.index == index: #si el indice que sigue al nodo actual es el taarget ...
+                (print(f'The node at position {index} is {runner.next.value}')) #solo para ubicarme
+                
+                after_node = runner.next #nodo que le sigue al nuevo nodo creado, esta es una variable temporal
+                            
+                new_node = SLNode(val) #crea un nuevo nodo 
+                new_node.next = after_node #insertamos todo lo que le sigue a este nuevo nodo usando la variable temporal
+                runner.next = new_node #el que le sigue al runner ahora es ese nodo
+                return #esto breaks the loop 
+                
+            runner = runner.next #itera 
 
 class SLNode:
     def __init__(self,val):
         self.value = val
         self.next = None
-        
+
+
