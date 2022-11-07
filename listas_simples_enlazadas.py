@@ -79,12 +79,7 @@ class SLList:
                     to_delete = runner.next
                     runner.next = to_delete.next 
                     print(val)
-                    
-                        
-                    
-                #if runner.next.value == val:
-                #   runner.next = runner.next.next
-                runner = runner.next  
+                runner = runner.next  #dentro del while, fuera de los if
     
     def create_index(self): #funcion para crear e imprimir indices
         counter =  0
