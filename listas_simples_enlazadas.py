@@ -40,27 +40,21 @@ class SLList:
         print('Now in SLList:')
         self.print_values()
         
-    def fetch_last(self):
-        runner = self.head
-        while runner != None: #osea que no es el ultimo nodo
-            runner = runner.next 
-            if runner.next == None: # ubicamos al ultimo nodo
-                print(runner.value)
-                return runner
-        #last_element = runner
-        #return last_element
-        
-    def remove_from_back(self):
-        last_element = self.fetch_last()
-        
+    def remove_from_back(self):        
         runner = self.head #nodo 1
+
+        if runner.next == None: 
+            print('There is only one element in SLList,removing it...')
+            runner.value = ""
+            runner = None
+            return
+
         #a_list = [] mi metodo
         while runner != None: #osea que no es el ultimo nodo
-            if runner.next == last_element: # ubicamos al ultimo nodo
+            if runner.next.next == None: # ubicamos al ultimo nodo
                 runner.next = None
                 return self
             runner = runner.next 
-
     
     def remove_val(self,val):
         runner = self.head
@@ -98,7 +92,7 @@ class SLList:
             if runner.next == None: #Evita salirse del scope de la lista
                     return
             if runner.next.index == index: #si el indice que sigue al nodo actual es el taarget ...
-                (print(f'The node at position {index} is {runner.next.value}')) #solo para ubicarme
+                #(print(f'The node at position {index} is {runner.next.value}')) #solo para ubicarme
                 
                 after_node = runner.next #nodo que le sigue al nuevo nodo creado, esta es una variable temporal
                             
